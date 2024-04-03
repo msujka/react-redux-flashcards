@@ -5,7 +5,14 @@ import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
 import { ALL_ICONS } from "../data/icons";
 // import addTopic
+import { addTopic } from "../features/topics/topicsSlice";
 
+
+/*
+Hook the new topic form up to the action creators your slice generates. 
+In src/components/NewTopicForm.js, import addTopic and dispatch it from the event handler 
+that runs when the new topic form is submitted.
+*/
 export default function NewTopicForm() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -19,6 +26,7 @@ export default function NewTopicForm() {
     }
 
     // dispatch new topic
+    dispatch(addTopic({ id: uuidv4(), name, icon }));
     navigate(ROUTES.topicsRoute());
   };
 
